@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
+import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
 
 final List<String> cityList = [];
 final myController = TextEditingController();
@@ -123,41 +124,14 @@ class CitySearchWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CityNameButton(
                   cityName: cityList[cityList.length - index - 1],
+                  inController: (p0) {
+                    myController.text = cityList[cityList.length - index - 1];
+                  },
                 );
               },
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CityNameButton extends StatelessWidget {
-  const CityNameButton({
-    super.key,
-    required this.cityName,
-  });
-
-  final String cityName;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        myController.text = cityName;
-      },
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(
-          WeatherColors.bleak.withOpacity(0.2),
-        ),
-      ),
-      child: Text(
-        cityName,
-        style: const TextStyle(
-          color: WeatherColors.bleak,
-          fontSize: 17,
-        ),
       ),
     );
   }
