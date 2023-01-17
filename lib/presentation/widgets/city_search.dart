@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
 
@@ -36,6 +37,7 @@ class CitySearchButton extends StatelessWidget {
               onPressed: () {
                 if (myController.text != "") {
                   cityList.add(myController.text);
+                  getHttp(myController.text);
                   Navigator.pop(context);
                   myController.text = "";
                 } else {
@@ -87,6 +89,7 @@ class CitySearchWidget extends StatelessWidget {
                 onPressed: () {
                   if (myController.text != "") {
                     cityList.add(myController.text);
+                    getHttp(myController.text);
                     Navigator.pop(context);
                     myController.text = "";
                   } else {
