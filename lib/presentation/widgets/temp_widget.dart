@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
+import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
 
-class WeatherNowWidget extends StatelessWidget {
-  const WeatherNowWidget({
+class TempWidget extends StatelessWidget {
+  const TempWidget({
     super.key,
     required this.minTemp,
     required this.maxTemp,
     required this.temp,
-    required this.weatherDescription,
+    required this.feelsLike,
   });
 
   final int minTemp;
   final int maxTemp;
   final int temp;
-  final String weatherDescription;
+  final int feelsLike;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,25 @@ class WeatherNowWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "$temp℃",
-                style: const TextStyle(
-                  color: WeatherColors.bleak,
-                  fontSize: 80,
-                  fontWeight: FontWeight.bold,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "$temp℃",
+                    style: const TextStyle(
+                      color: WeatherColors.bleak,
+                      fontSize: 80,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Ощущается как $feelsLike ℃",
+                    style: const TextStyle(
+                      color: WeatherColors.bleak,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,18 +82,7 @@ class WeatherNowWidget extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            width: MediaQuery.of(context).size.width - 50,
-            height: 4,
-            color: WeatherColors.bleak,
-          ),
-          Text(
-            weatherDescription,
-            style: const TextStyle(
-              color: WeatherColors.bleak,
-              fontSize: 30,
-            ),
-          ),
+          const LineUIExample(),
         ],
       ),
     );

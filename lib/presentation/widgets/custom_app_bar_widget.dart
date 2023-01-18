@@ -5,15 +5,15 @@ import 'package:weather_app2/presentation/widgets/city_search.dart';
 class DateAndDrawerWidget extends StatelessWidget {
   const DateAndDrawerWidget({
     super.key,
-    required this.dateText,
     required this.cityName,
   });
 
-  final String dateText;
   final String cityName;
 
   @override
   Widget build(BuildContext context) {
+    final String dateText =
+        "${DateTime.now().day.toString()}-${DateTime.now().month.toString()}-${DateTime.now().year.toString()}";
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 30,
