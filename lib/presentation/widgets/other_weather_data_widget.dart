@@ -18,24 +18,43 @@ class OtherWeatherDataWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
       width: MediaQuery.of(context).size.width - 50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const Text(
+                "Давление",
+                style: TextStyle(
+                  color: WeatherColors.bleak,
+                  fontSize: 20,
+                ),
+              ),
               Text(
-                "Давление $pressure мм/рс",
+                "$pressure мм/рс",
                 style: const TextStyle(
                   color: WeatherColors.bleak,
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(
-                height: 10,
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Влажность",
+                style: TextStyle(
+                  color: WeatherColors.bleak,
+                  fontSize: 20,
+                ),
               ),
               Text(
-                "Влажность $humidity%",
+                "$humidity%",
                 style: const TextStyle(
                   color: WeatherColors.bleak,
                   fontSize: 20,

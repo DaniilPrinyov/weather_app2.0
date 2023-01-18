@@ -22,35 +22,64 @@ class WinterWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 50,
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          Column(
             children: [
-              Column(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  const Text(
+                    "Скорость ветра",
+                    style: TextStyle(
+                      color: WeatherColors.bleak,
+                      fontSize: 20,
+                    ),
+                  ),
                   Text(
-                    "Скорость ветра $speed м/с",
+                    "$speed м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Направление ветра",
+                    style: TextStyle(
+                      color: WeatherColors.bleak,
+                      fontSize: 20,
+                    ),
                   ),
                   Text(
-                    "Направление ветра $degº",
+                    "$degº",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Порывы до",
+                    style: TextStyle(
+                      color: WeatherColors.bleak,
+                      fontSize: 20,
+                    ),
                   ),
                   Text(
-                    "Порывы до $gust м/с",
+                    "$gust м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
