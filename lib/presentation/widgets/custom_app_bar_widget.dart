@@ -6,9 +6,11 @@ class DateAndDrawerWidget extends StatelessWidget {
   const DateAndDrawerWidget({
     super.key,
     required this.cityName,
+    required this.weatherDescription,
   });
 
   final String cityName;
+  final String weatherDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,13 @@ class DateAndDrawerWidget extends StatelessWidget {
                 style: const TextStyle(
                   color: WeatherColors.bleak,
                   fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+              Text(
+                weatherDescription,
+                style: const TextStyle(
+                  color: WeatherColors.bleak,
                   fontSize: 30,
                 ),
               ),

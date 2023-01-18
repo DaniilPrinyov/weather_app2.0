@@ -12,4 +12,7 @@ class WeatherIcons {
   static const String snow = "assets/images/snow2.png";
   static const String snowStorm = "assets/images/snow3.png";
   static const String hail = "assets/images/hail.png";
+  static const String winter = "assets/images/winter.png";
+  static const String pressure = "assets/images/pressure.png";
+  static const String humidity = "assets/images/humidity.png";
 }

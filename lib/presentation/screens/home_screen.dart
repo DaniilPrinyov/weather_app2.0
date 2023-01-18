@@ -4,6 +4,7 @@ import 'package:rive/rive.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
 import 'package:weather_app2/presentation/widgets/other_weather_data_widget.dart';
 import 'package:weather_app2/presentation/widgets/weather_for_hour_list_widget.dart';
 import 'package:weather_app2/presentation/widgets/temp_widget.dart';
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const DateAndDrawerWidget(
                 cityName: "Москва",
+                weatherDescription: "Ясно",
               ),
               const Spacer(),
               Column(
@@ -38,14 +40,21 @@ class HomeScreen extends StatelessWidget {
                     temp: 20,
                     feelsLike: 13,
                   ),
-                  WinterWidget(),
+                  LineUIExample(),
+                  WinterWidget(
+                    deg: '13.99',
+                    gust: '156',
+                    speed: '5.88',
+                  ),
+                  LineUIExample(),
                   OtherWeatherDataWidget(
-                    weatherDescription: "Ясно",
-                  )
+                    humidity: "94",
+                    pressure: "1016",
+                  ),
                   // WeatherForHourListWidget(
                   //   weatherDataMap: ["rain", 22, 12],
                   // ),
-                  // SizedBox(height: 35),
+                  SizedBox(height: 35),
                 ],
               ),
             ],

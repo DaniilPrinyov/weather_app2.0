@@ -82,7 +82,6 @@ class TempWidget extends StatelessWidget {
               ),
             ],
           ),
-          const LineUIExample(),
         ],
       ),
     );
