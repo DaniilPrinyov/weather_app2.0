@@ -6,7 +6,6 @@ import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
 import 'package:weather_app2/presentation/widgets/other_weather_data_widget.dart';
-import 'package:weather_app2/presentation/widgets/weather_for_hour_list_widget.dart';
 import 'package:weather_app2/presentation/widgets/temp_widget.dart';
 import 'package:weather_app2/presentation/widgets/winter_widget.dart';
 
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           Transform.translate(
             offset: const Offset(-150, -300),
             child: RiveAnimation.asset(
-              bgIcon("scattered clouds"),
+              bgIcon("clear sky"),
             ),
           ),
           Column(

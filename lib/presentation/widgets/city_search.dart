@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/http_request.dart';
+import 'package:weather_app2/domain/repository/hive_storage.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
 
@@ -36,7 +37,7 @@ class CitySearchButton extends StatelessWidget {
             TextButton(
               onPressed: () {
                 if (myController.text != "") {
-                  cityList.add(myController.text);
+                  CityListHive().put(myController.text);
                   getHttp(myController.text);
                   Navigator.pop(context);
                   myController.text = "";
@@ -88,7 +89,7 @@ class CitySearchWidget extends StatelessWidget {
               suffixIcon: IconButton(
                 onPressed: () {
                   if (myController.text != "") {
-                    cityList.add(myController.text);
+                    CityListHive().put(myController.text);
                     getHttp(myController.text);
                     Navigator.pop(context);
                     myController.text = "";
@@ -122,13 +123,19 @@ class CitySearchWidget extends StatelessWidget {
             margin: const EdgeInsets.only(top: 5),
             height: 120,
             width: 300,
-            child: ListView.builder(
-              itemCount: cityList.length,
-              itemBuilder: (context, index) {
-                return CityNameButton(
-                  cityName: cityList[cityList.length - index - 1],
-                  inController: (p0) {
-                    myController.text = cityList[cityList.length - index - 1];
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                ListView.builder(
+                  itemCount: CityListHive().length(),
+                  itemBuilder: (context, index) {
+                    return CityNameButton(
+                      cityName: CityListHive()
+                          .get(CityListHive().length() - index - 1),
+                      inController: (p0) {
+                        myController.text = CityListHive()
+                            .get(CityListHive().length() - index - 1);
+                      },
+                    );
                   },
                 );
               },
