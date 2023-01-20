@@ -20,6 +20,18 @@ class CitySearchButton extends StatelessWidget {
           content: const CitySearchWidget(),
           actions: [
             TextButton(
+              onPressed: () => CityListHive().clean(),
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(
+                  Colors.red.shade200,
+                ),
+              ),
+              child: const Text(
+                "Очистить список",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
               onPressed: () => Navigator.pop(context),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
@@ -37,7 +49,8 @@ class CitySearchButton extends StatelessWidget {
             TextButton(
               onPressed: () {
                 if (myController.text != "") {
-                  CityListHive().put(myController.text);
+                  cityList.add(myController.text);
+                  CityListHive().put(cityList);
                   getHttp(myController.text);
                   Navigator.pop(context);
                   myController.text = "";
@@ -89,7 +102,8 @@ class CitySearchWidget extends StatelessWidget {
               suffixIcon: IconButton(
                 onPressed: () {
                   if (myController.text != "") {
-                    CityListHive().put(myController.text);
+                    cityList.add(myController.text);
+                    CityListHive().put(cityList);
                     getHttp(myController.text);
                     Navigator.pop(context);
                     myController.text = "";
@@ -116,29 +130,27 @@ class CitySearchWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 9,
           ),
           const Text("Последние:"),
           Container(
             margin: const EdgeInsets.only(top: 5),
-            height: 120,
+            height: 80,
             width: 300,
             child: FutureBuilder(
-              builder: (context, snapshot) {
-                ListView.builder(
-                  itemCount: CityListHive().length(),
-                  itemBuilder: (context, index) {
-                    return CityNameButton(
-                      cityName: CityListHive()
-                          .get(CityListHive().length() - index - 1),
-                      inController: (p0) {
-                        myController.text = CityListHive()
-                            .get(CityListHive().length() - index - 1);
-                      },
-                    );
-                  },
-                );
-              },
+              future: CityListHive().get(),
+              builder: (context, snapshot) => ListView.builder(
+                itemCount: cityList.length,
+                itemBuilder: (context, index) {
+                  return CityNameButton(
+                    cityName: snapshot.data![snapshot.data!.length - index - 1],
+                    inController: (p0) {
+                      myController.text =
+                          snapshot.data![snapshot.data!.length - index - 1];
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],
