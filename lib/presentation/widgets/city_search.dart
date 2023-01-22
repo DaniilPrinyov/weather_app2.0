@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/domain/repository/hive_storage.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
 
-final List<String> cityList = [];
+List<String> cityList = [];
 final myController = TextEditingController();
 
 class CitySearchButton extends StatelessWidget {
@@ -20,7 +19,12 @@ class CitySearchButton extends StatelessWidget {
           content: const CitySearchWidget(),
           actions: [
             TextButton(
-              onPressed: () => CityListHive().clean(),
+              onPressed: () {
+                CityListHive().clean();
+                cityList = [];
+                Navigator.pop(context);
+                myController.text = "";
+              },
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
                   Colors.red.shade200,
@@ -32,7 +36,10 @@ class CitySearchButton extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                myController.text = "";
+              },
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
                   WeatherColors.bleak.withOpacity(0.2),
@@ -51,11 +58,12 @@ class CitySearchButton extends StatelessWidget {
                 if (myController.text != "") {
                   cityList.add(myController.text);
                   CityListHive().put(cityList);
-                  getHttp(myController.text);
+                  //getHttp(myController.text);
                   Navigator.pop(context);
                   myController.text = "";
                 } else {
                   Navigator.pop(context);
+                  myController.text = "";
                 }
               },
               style: ButtonStyle(
@@ -104,11 +112,12 @@ class CitySearchWidget extends StatelessWidget {
                   if (myController.text != "") {
                     cityList.add(myController.text);
                     CityListHive().put(cityList);
-                    getHttp(myController.text);
+                    //getHttp(myController.text);
                     Navigator.pop(context);
                     myController.text = "";
                   } else {
                     Navigator.pop(context);
+                    myController.text = "";
                   }
                 },
                 icon: const Icon(
@@ -140,13 +149,16 @@ class CitySearchWidget extends StatelessWidget {
             child: FutureBuilder(
               future: CityListHive().get(),
               builder: (context, snapshot) => ListView.builder(
-                itemCount: cityList.length,
+                itemCount: (snapshot.data != null) ? snapshot.data!.length : 10,
                 itemBuilder: (context, index) {
                   return CityNameButton(
-                    cityName: snapshot.data![snapshot.data!.length - index - 1],
+                    cityName: (snapshot.data != null)
+                        ? snapshot.data![snapshot.data!.length - index - 1]
+                        : "",
                     inController: (p0) {
-                      myController.text =
-                          snapshot.data![snapshot.data!.length - index - 1];
+                      myController.text = (snapshot.data != null)
+                          ? snapshot.data![snapshot.data!.length - index - 1]
+                          : "";
                     },
                   );
                 },

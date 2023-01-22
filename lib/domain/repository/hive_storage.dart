@@ -13,13 +13,13 @@ class CityListHive {
         ? buttonListBox.get("buttonListBox") as List<String>
         : [];
     buttonListBox.close();
-
     return result;
   }
 
   Future<void> clean() async {
     final Box buttonListBox = await Hive.openBox<List<String>>("buttonListBox");
     buttonListBox.delete("buttonListBox");
+    buttonListBox.put("buttonListBox", <String>[]);
     buttonListBox.close();
   }
 }
