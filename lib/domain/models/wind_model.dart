@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-// part 'wind_weather.g.dart';
+part 'wind_model.g.dart';
 
 @JsonSerializable()
 class Wind {
@@ -9,7 +9,9 @@ class Wind {
     this.deg,
     this.gust,
   );
-  double speed;
-  double deg;
-  double gust;
+  final double speed;
+  final double deg;
+  final double gust;
+
+  factory Wind.fromJson(Map<String, double> json) => _$WindFromJson(json);
 }

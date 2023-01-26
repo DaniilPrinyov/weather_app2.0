@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-//part 'cord_model.g.dart';
+part 'cord_model.g.dart';
 
 @JsonSerializable()
 class Cord {
@@ -8,6 +8,8 @@ class Cord {
     this.lon,
     this.lan,
   );
-  double lon;
-  double lan;
+  final double lon;
+  final double lan;
+
+  factory Cord.fromJson(Map<String, double> json) => _$CordFromJson(json);
 }

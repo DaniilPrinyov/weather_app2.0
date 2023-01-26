@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-//part 'weather_model.g.dart';
+part 'waerthet_model.g.dart';
 
 @JsonSerializable()
 class Weather {
@@ -8,6 +8,8 @@ class Weather {
     this.main,
     this.description,
   );
-  String main;
-  String description;
+  final String main;
+  final String description;
+
+  factory Weather.fromJson(Map<String, String> json) => _$WeatherFromJson(json);
 }
