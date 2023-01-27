@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
@@ -55,6 +56,17 @@ class HomeScreen extends StatelessWidget {
                   // ),
                   SizedBox(height: 35),
                 ],
+              ),
+              TextButton(
+                onPressed: () async {
+                  print(
+                    await Geolocator.getCurrentPosition(
+                      desiredAccuracy: LocationAccuracy.high,
+                      timeLimit: const Duration(seconds: 10),
+                    ),
+                  );
+                },
+                child: const Text("qwert"),
               ),
             ],
           ).asGlass(
