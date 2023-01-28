@@ -51,9 +51,6 @@ class HomeScreen extends StatelessWidget {
                     humidity: "94",
                     pressure: "1016",
                   ),
-                  // WeatherForHourListWidget(
-                  //   weatherDataMap: ["rain", 22, 12],
-                  // ),
                   SizedBox(height: 35),
                 ],
               ),
@@ -61,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () async {
                   print(
                     await Geolocator.getCurrentPosition(
-                      desiredAccuracy: LocationAccuracy.high,
-                      timeLimit: const Duration(seconds: 10),
+                      timeLimit: const Duration(seconds: 5),
+                      desiredAccuracy: LocationAccuracy.low,
                     ),
                   );
                 },
