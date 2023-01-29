@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/domain/repository/hive_storage.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
@@ -54,11 +55,11 @@ class CitySearchButton extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (myController.text != "") {
+                  await ApiClient().getWeather(myController.text);
                   cityList.add(myController.text);
                   CityListHive().put(cityList);
-                  //getHttp(myController.text);
                   Navigator.pop(context);
                   myController.text = "";
                 } else {
@@ -108,11 +109,11 @@ class CitySearchWidget extends StatelessWidget {
             onChanged: (value) {},
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                onPressed: () {
+                onPressed: () async {
                   if (myController.text != "") {
+                    await ApiClient().getWeather(myController.text);
                     cityList.add(myController.text);
                     CityListHive().put(cityList);
-                    //getHttp(myController.text);
                     Navigator.pop(context);
                     myController.text = "";
                   } else {

@@ -54,17 +54,6 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 35),
                 ],
               ),
-              TextButton(
-                onPressed: () async {
-                  print(
-                    await Geolocator.getCurrentPosition(
-                      timeLimit: const Duration(seconds: 5),
-                      desiredAccuracy: LocationAccuracy.low,
-                    ),
-                  );
-                },
-                child: const Text("qwert"),
-              ),
             ],
           ).asGlass(
             blurX: 30,
