@@ -1,17 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'waerthet_model.dart';
+part of 'weather_map_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Weather _$WeatherFromJson(Map<String, dynamic> json) => Weather(
+WeatherMap _$WeatherMapFromJson(Map<String, dynamic> json) => WeatherMap(
       json['main'] as String,
       json['description'] as String,
     );
 
-Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
+Map<String, dynamic> _$WeatherMapToJson(WeatherMap instance) =>
+    <String, dynamic>{
       'main': instance.main,
       'description': instance.description,
     };

@@ -13,12 +13,12 @@ class AllWeather {
     this.name,
     this.cod,
   );
-
-  final Map cord;
-  final Map weather;
-  final Map main;
-  final Map wind;
-  final Map clouds;
+  @JsonKey(name: "coord")
+  final Map<String, dynamic> cord;
+  final List<Map> weather;
+  final Map<String, dynamic> main;
+  final Map<String, dynamic> wind;
+  final Map<String, dynamic> clouds;
   final String name;
   final int cod;
 
