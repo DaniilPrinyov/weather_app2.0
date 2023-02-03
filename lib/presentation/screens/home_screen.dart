@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
+import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/widgets/custom_app_bar_widget.dart';
@@ -32,6 +32,10 @@ class HomeScreen extends StatelessWidget {
                 weatherDescription: "Ясно",
               ),
               const Spacer(),
+              TextButton(
+                onPressed: () async => ApiClient().getWeatherDefault(),
+                child: Text("get position"),
+              ),
               Column(
                 children: const [
                   TempWidget(

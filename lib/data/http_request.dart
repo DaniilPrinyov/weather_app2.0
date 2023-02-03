@@ -53,10 +53,33 @@ class ApiClient {
   }
 
   Future<void> getWeatherDefault() async {
-    final Position geolocationUser = await Geolocator.getCurrentPosition(
-      timeLimit: const Duration(seconds: 5),
-      desiredAccuracy: LocationAccuracy.low,
-    );
+    Future<Position> determinePosition() async {
+      bool serviceEnabled;
+      LocationPermission permission;
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        return Future.error('Location services are disabled.');
+      }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          return Future.error('Location permissions are denied');
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.',
+        );
+      }
+
+      return Geolocator.getCurrentPosition(
+        timeLimit: const Duration(seconds: 5),
+        desiredAccuracy: LocationAccuracy.low,
+      );
+    }
+
+    final Position geolocationUser = await determinePosition();
     final double lat = geolocationUser.latitude;
     final double lon = geolocationUser.longitude;
     final url = Uri.parse(
@@ -67,6 +90,6 @@ class ApiClient {
     final jsonStrings = await response.transform(utf8.decoder).join();
     final dynamic json = await jsonDecode(jsonStrings);
     final weatherGet = AllWeather.fromJson(json as Map<String, dynamic>);
-    print(weatherGet.main);
+    print(weatherGet.name);
   }
 }
