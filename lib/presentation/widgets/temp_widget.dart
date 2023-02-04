@@ -11,10 +11,10 @@ class TempWidget extends StatelessWidget {
     required this.feelsLike,
   });
 
-  final int minTemp;
-  final int maxTemp;
-  final int temp;
-  final int feelsLike;
+  final double minTemp;
+  final double maxTemp;
+  final double temp;
+  final double feelsLike;
 
   @override
   Widget build(BuildContext context) {

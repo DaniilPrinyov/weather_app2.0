@@ -19,66 +19,77 @@ class CitySearchButton extends StatelessWidget {
           title: const Text('Выберете город'),
           content: const CitySearchWidget(),
           actions: [
-            TextButton(
-              onPressed: () {
-                CityListHive().clean();
-                cityList = [];
-                Navigator.pop(context);
-                myController.text = "";
-              },
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(
-                  Colors.red.shade200,
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    CityListHive().clean();
+                    cityList = [];
+                    Navigator.pop(context);
+                    myController.text = "";
+                  },
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(
+                      Colors.red.shade200,
+                    ),
+                  ),
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.pink,
+                  ),
                 ),
-              ),
-              child: const Text(
-                "Очистить список",
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                myController.text = "";
-              },
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(
-                  WeatherColors.bleak.withOpacity(0.2),
+                const SizedBox(
+                  width: 40,
                 ),
-              ),
-              child: const Text(
-                'Отмена',
-                style: TextStyle(
-                  color: WeatherColors.bleak,
-                  fontSize: 20,
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        myController.text = "";
+                      },
+                      style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                          WeatherColors.bleak.withOpacity(0.2),
+                        ),
+                      ),
+                      child: const Text(
+                        'Отмена',
+                        style: TextStyle(
+                          color: WeatherColors.bleak,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        if (myController.text != "") {
+                          await ApiClient().getWeather(myController.text);
+                          cityList.add(myController.text);
+                          CityListHive().put(cityList);
+                          Navigator.pop(context);
+                          myController.text = "";
+                        } else {
+                          Navigator.pop(context);
+                          myController.text = "";
+                        }
+                      },
+                      style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                          WeatherColors.bleak.withOpacity(0.2),
+                        ),
+                      ),
+                      child: const Text(
+                        'Ок',
+                        style: TextStyle(
+                          color: WeatherColors.bleak,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (myController.text != "") {
-                  await ApiClient().getWeather(myController.text);
-                  cityList.add(myController.text);
-                  CityListHive().put(cityList);
-                  Navigator.pop(context);
-                  myController.text = "";
-                } else {
-                  Navigator.pop(context);
-                  myController.text = "";
-                }
-              },
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(
-                  WeatherColors.bleak.withOpacity(0.2),
-                ),
-              ),
-              child: const Text(
-                'Ок',
-                style: TextStyle(
-                  color: WeatherColors.bleak,
-                  fontSize: 20,
-                ),
-              ),
+              ],
             ),
           ],
           backgroundColor: WeatherColors.white,

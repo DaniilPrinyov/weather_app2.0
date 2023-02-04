@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
-import 'package:weather_app2/presentation/ui_data/weather_icons.dart';
-import 'package:weather_app2/presentation/ui_logic/weater_Icon_choice.dart';
 
 class OtherWeatherDataWidget extends StatelessWidget {
   const OtherWeatherDataWidget({
@@ -10,8 +8,8 @@ class OtherWeatherDataWidget extends StatelessWidget {
     required this.pressure,
   });
 
-  final String humidity;
-  final String pressure;
+  final double humidity;
+  final double pressure;
 
   @override
   Widget build(BuildContext context) {

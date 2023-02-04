@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
-import 'package:weather_app2/data/http_request.dart';
+import 'package:weather_app2/internal/weather_date_vars.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/widgets/custom_app_bar_widget.dart';
@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: WeatherColors.white,
       body: Stack(
         children: [
@@ -27,35 +28,31 @@ class HomeScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              const DateAndDrawerWidget(
-                cityName: "Москва",
-                weatherDescription: "Ясно",
+              DateAndDrawerWidget(
+                cityName: name,
+                weatherDescription: mainWeather,
               ),
               const Spacer(),
-              TextButton(
-                onPressed: () async => ApiClient().getWeatherDefault(),
-                child: Text("get position"),
-              ),
               Column(
-                children: const [
+                children: [
                   TempWidget(
-                    minTemp: 18,
-                    maxTemp: 23,
-                    temp: 20,
-                    feelsLike: 13,
+                    minTemp: tempMin,
+                    maxTemp: tempMax,
+                    temp: temp,
+                    feelsLike: feelsLike,
                   ),
-                  LineUIExample(),
+                  const LineUIExample(),
                   WinterWidget(
-                    deg: '13.99',
-                    gust: '156',
-                    speed: '5.88',
+                    deg: deg,
+                    gust: gust,
+                    speed: speed,
                   ),
-                  LineUIExample(),
+                  const LineUIExample(),
                   OtherWeatherDataWidget(
-                    humidity: "94",
-                    pressure: "1016",
+                    humidity: humidity,
+                    pressure: pressure,
                   ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                 ],
               ),
             ],

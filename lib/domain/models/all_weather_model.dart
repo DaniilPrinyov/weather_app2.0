@@ -15,7 +15,7 @@ class AllWeather {
   );
   @JsonKey(name: "coord")
   final Map<String, dynamic> cord;
-  final List<Map> weather;
+  final List<Map<String, dynamic>> weather;
   final Map<String, dynamic> main;
   final Map<String, dynamic> wind;
   final Map<String, dynamic> clouds;

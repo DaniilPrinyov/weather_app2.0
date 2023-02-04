@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
-import 'package:weather_app2/presentation/ui_data/weather_icons.dart';
-import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
 
 class WinterWidget extends StatelessWidget {
   const WinterWidget({
@@ -11,9 +9,9 @@ class WinterWidget extends StatelessWidget {
     required this.gust,
   });
 
-  final String speed;
-  final String deg;
-  final String gust;
+  final double speed;
+  final double deg;
+  final double gust;
 
   @override
   Widget build(BuildContext context) {
