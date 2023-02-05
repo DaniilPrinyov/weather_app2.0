@@ -8,8 +8,8 @@ class OtherWeatherDataWidget extends StatelessWidget {
     required this.pressure,
   });
 
-  final double humidity;
-  final double pressure;
+  final num humidity;
+  final num pressure;
 
   @override
   Widget build(BuildContext context) {

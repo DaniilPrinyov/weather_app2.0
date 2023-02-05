@@ -36,7 +36,7 @@ class TempWidget extends StatelessWidget {
                     "$temp℃",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
-                      fontSize: 80,
+                      fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -9,9 +9,9 @@ class WinterWidget extends StatelessWidget {
     required this.gust,
   });
 
-  final double speed;
-  final double deg;
-  final double gust;
+  final num speed;
+  final num deg;
+  final num gust;
 
   @override
   Widget build(BuildContext context) {

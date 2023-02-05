@@ -13,6 +13,9 @@ String bgIcon(String name) {
     case "broken clouds":
       result = "assets/rive/cloudy.riv";
       break;
+    case "Clouds":
+      result = "assets/rive/cloudy.riv";
+      break;
     case "shower rain":
       result = "assets/rive/rain.riv";
       break;

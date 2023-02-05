@@ -40,14 +40,14 @@ class DateAndDrawerWidget extends StatelessWidget {
                 style: const TextStyle(
                   color: WeatherColors.bleak,
                   fontWeight: FontWeight.bold,
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
               ),
               Text(
                 weatherDescription,
                 style: const TextStyle(
                   color: WeatherColors.bleak,
-                  fontSize: 30,
+                  fontSize: 20,
                 ),
               ),
             ],
