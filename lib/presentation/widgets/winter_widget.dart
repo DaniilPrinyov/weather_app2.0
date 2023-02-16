@@ -33,7 +33,7 @@ class WinterWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$speed м/с",
+                    "${speed.round()} м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
@@ -55,7 +55,7 @@ class WinterWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$degº",
+                    "${deg.round()}º",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
@@ -77,7 +77,7 @@ class WinterWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$gust м/с",
+                    "${(gust == 0) ? "-" : gust.round()} м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,

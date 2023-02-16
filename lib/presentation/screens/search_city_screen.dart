@@ -5,22 +5,27 @@ import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/widgets/city_search_button.dart';
+
 import 'package:weather_app2/presentation/widgets/dare_and_city_name_widget.dart';
 import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
+import 'package:weather_app2/presentation/widgets/go_home_button.dart';
 import 'package:weather_app2/presentation/widgets/other_weather_data_widget.dart';
 import 'package:weather_app2/presentation/widgets/temp_widget.dart';
 import 'package:weather_app2/presentation/widgets/winter_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+class SearchCity extends StatelessWidget {
+  const SearchCity({
+    super.key,
+    required this.nameCity,
+  });
+  final String nameCity;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: WeatherColors.white,
       body: FutureBuilder(
-        future: ApiClient().getWeatherDefault(),
+        future: ApiClient().getWeather(nameCity),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -49,7 +54,12 @@ class HomeScreen extends StatelessWidget {
                               .data!.weather[0]["description"]
                               .toString(),
                         ),
-                        const CitySearchButton(),
+                        Column(
+                          children: const [
+                            CitySearchButton(),
+                            GoHomeButton(),
+                          ],
+                        ),
                       ],
                     ),
                     const Spacer(),
@@ -58,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                         TempWidget(
                           minTemp: snapshot.data!.main["temp_min"] as double,
                           maxTemp: snapshot.data!.main["temp_max"] as double,
-                          temp: snapshot.data!.main["temp"] as num,
+                          temp: snapshot.data!.main["temp"] as double,
                           feelsLike:
                               snapshot.data!.main["feels_like"] as double,
                         ),

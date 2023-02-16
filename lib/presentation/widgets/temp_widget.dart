@@ -11,10 +11,10 @@ class TempWidget extends StatelessWidget {
     required this.feelsLike,
   });
 
-  final double minTemp;
-  final double maxTemp;
-  final double temp;
-  final double feelsLike;
+  final num minTemp;
+  final num maxTemp;
+  final num temp;
+  final num feelsLike;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class TempWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "$temp℃",
+                    "${temp.round()}℃",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 60,
@@ -41,7 +41,7 @@ class TempWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Ощущается как $feelsLike ℃",
+                    "Ощущается как ${feelsLike.round()} ℃",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
@@ -59,7 +59,7 @@ class TempWidget extends StatelessWidget {
                         color: WeatherColors.bleak,
                       ),
                       Text(
-                        "$maxTemp℃",
+                        "${maxTemp.round()}℃",
                         style: const TextStyle(
                           color: WeatherColors.bleak,
                         ),
@@ -74,7 +74,7 @@ class TempWidget extends StatelessWidget {
                         color: WeatherColors.bleak,
                       ),
                       Text(
-                        "$minTemp℃",
+                        "${minTemp.round()}℃",
                         style: const TextStyle(
                           color: WeatherColors.bleak,
                         ),

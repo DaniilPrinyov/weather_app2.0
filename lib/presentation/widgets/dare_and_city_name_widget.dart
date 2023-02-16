@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
-import 'package:weather_app2/presentation/widgets/city_search.dart';
+import 'package:weather_app2/presentation/widgets/city_search_button.dart';
 
-class DateAndDrawerWidget extends StatelessWidget {
-  const DateAndDrawerWidget({
+class DateAndCityName extends StatelessWidget {
+  const DateAndCityName({
     super.key,
     required this.cityName,
     required this.weatherDescription,
@@ -52,7 +52,6 @@ class DateAndDrawerWidget extends StatelessWidget {
               ),
             ],
           ),
-          const CitySearchButton(),
         ],
       ),
     );

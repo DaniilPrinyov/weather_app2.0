@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/domain/repository/hive_storage.dart';
+import 'package:weather_app2/presentation/screens/search_city_screen.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/widgets/examples/city_search_button_example.dart';
 
@@ -64,10 +65,14 @@ class CitySearchButton extends StatelessWidget {
                     TextButton(
                       onPressed: () async {
                         if (myController.text != "") {
-                          await ApiClient().getWeather(myController.text);
                           cityList.add(myController.text);
                           CityListHive().put(cityList);
-                          Navigator.pop(context);
+                          await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SearchCity(nameCity: myController.text),
+                            ),
+                          );
                           myController.text = "";
                         } else {
                           Navigator.pop(context);
@@ -122,10 +127,14 @@ class CitySearchWidget extends StatelessWidget {
               suffixIcon: IconButton(
                 onPressed: () async {
                   if (myController.text != "") {
-                    await ApiClient().getWeather(myController.text);
                     cityList.add(myController.text);
                     CityListHive().put(cityList);
-                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SearchCity(nameCity: myController.text),
+                      ),
+                    );
                     myController.text = "";
                   } else {
                     Navigator.pop(context);
