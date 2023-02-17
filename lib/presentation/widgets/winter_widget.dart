@@ -9,9 +9,9 @@ class WinterWidget extends StatelessWidget {
     required this.gust,
   });
 
-  final num speed;
+  final String speed;
   final num deg;
-  final num gust;
+  final String gust;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class WinterWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${speed.round()} м/с",
+                    "$speed м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
@@ -54,13 +54,19 @@ class WinterWidget extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    "${deg.round()}º",
-                    style: const TextStyle(
-                      color: WeatherColors.bleak,
-                      fontSize: 20,
+                  if (deg == -1)
+                    const Text(
+                      "-",
+                      style: TextStyle(
+                        color: WeatherColors.bleak,
+                        fontSize: 20,
+                      ),
+                    )
+                  else
+                    Transform.rotate(
+                      angle: deg.toDouble(),
+                      child: const Icon(Icons.arrow_forward_rounded),
                     ),
-                  ),
                 ],
               ),
               const SizedBox(
@@ -77,7 +83,7 @@ class WinterWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${(gust == 0) ? "-" : gust.round()} м/с",
+                    "$gust м/с",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,

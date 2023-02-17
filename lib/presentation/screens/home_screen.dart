@@ -4,6 +4,7 @@ import 'package:rive/rive.dart';
 import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
+import 'package:weather_app2/presentation/ui_logic/null_checer.dart';
 import 'package:weather_app2/presentation/widgets/city_search_button.dart';
 import 'package:weather_app2/presentation/widgets/dare_and_city_name_widget.dart';
 import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
@@ -28,7 +29,10 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
+            return const Center(
+              child: Text(
+                  "Для работы данного приложения требуется доступ к вашим геоданным"),
+            );
           } else {
             return Stack(
               children: [
@@ -56,24 +60,26 @@ class HomeScreen extends StatelessWidget {
                     Column(
                       children: [
                         TempWidget(
-                          minTemp: snapshot.data!.main["temp_min"] as double,
-                          maxTemp: snapshot.data!.main["temp_max"] as double,
-                          temp: snapshot.data!.main["temp"] as num,
+                          minTemp: nullChecker(snapshot.data!.main["temp_min"]),
+                          maxTemp: nullChecker(snapshot.data!.main["temp_max"]),
+                          temp: nullChecker(snapshot.data!.main["temp"]),
                           feelsLike:
-                              snapshot.data!.main["feels_like"] as double,
+                              nullChecker(snapshot.data!.main["feels_like"]),
                         ),
                         const LineUIExample(),
                         WinterWidget(
-                          deg: snapshot.data!.wind["deg"] as num,
-                          gust: (snapshot.data!.wind["gust"] == null)
-                              ? 0
-                              : snapshot.data!.wind["gust"] as num,
-                          speed: snapshot.data!.wind["speed"] as num,
+                          deg: (snapshot.data!.wind["deg"] != null)
+                              ? snapshot.data!.wind["deg"] as num
+                              : -1,
+                          gust: nullChecker(snapshot.data!.wind["gust"]),
+                          speed: nullChecker(snapshot.data!.wind["speed"]),
                         ),
                         const LineUIExample(),
                         OtherWeatherDataWidget(
-                          humidity: snapshot.data!.main["humidity"] as num,
-                          pressure: snapshot.data!.main["pressure"] as num,
+                          humidity:
+                              nullChecker(snapshot.data!.main["humidity"]),
+                          pressure:
+                              nullChecker(snapshot.data!.main["pressure"]),
                         ),
                         const SizedBox(height: 35),
                       ],

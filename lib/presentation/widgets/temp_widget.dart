@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
-import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
 
 class TempWidget extends StatelessWidget {
   const TempWidget({
@@ -11,10 +10,10 @@ class TempWidget extends StatelessWidget {
     required this.feelsLike,
   });
 
-  final num minTemp;
-  final num maxTemp;
-  final num temp;
-  final num feelsLike;
+  final String minTemp;
+  final String maxTemp;
+  final String temp;
+  final String feelsLike;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class TempWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${temp.round()}℃",
+                    "$temp℃",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 60,
@@ -41,7 +40,7 @@ class TempWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Ощущается как ${feelsLike.round()} ℃",
+                    "Ощущается как $feelsLike ℃",
                     style: const TextStyle(
                       color: WeatherColors.bleak,
                       fontSize: 20,
@@ -59,7 +58,7 @@ class TempWidget extends StatelessWidget {
                         color: WeatherColors.bleak,
                       ),
                       Text(
-                        "${maxTemp.round()}℃",
+                        "$maxTemp℃",
                         style: const TextStyle(
                           color: WeatherColors.bleak,
                         ),
@@ -74,7 +73,7 @@ class TempWidget extends StatelessWidget {
                         color: WeatherColors.bleak,
                       ),
                       Text(
-                        "${minTemp.round()}℃",
+                        "$minTemp℃",
                         style: const TextStyle(
                           color: WeatherColors.bleak,
                         ),
