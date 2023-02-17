@@ -6,9 +6,9 @@ import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/ui_logic/null_checer.dart';
 import 'package:weather_app2/presentation/widgets/city_search_button.dart';
-
 import 'package:weather_app2/presentation/widgets/dare_and_city_name_widget.dart';
 import 'package:weather_app2/presentation/widgets/examples/line_ui_example.dart';
+import 'package:weather_app2/presentation/widgets/go_home_button.dart';
 import 'package:weather_app2/presentation/widgets/other_weather_data_widget.dart';
 import 'package:weather_app2/presentation/widgets/temp_widget.dart';
 import 'package:weather_app2/presentation/widgets/winter_widget.dart';
@@ -54,7 +54,12 @@ class SearchCity extends StatelessWidget {
                               .data!.weather[0]["description"]
                               .toString(),
                         ),
-                        const CitySearchButton(),
+                        Column(
+                          children: const [
+                            CitySearchButton(),
+                            GoHomeButton(),
+                          ],
+                        ),
                       ],
                     ),
                     const Spacer(),

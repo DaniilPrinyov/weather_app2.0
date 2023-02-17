@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app2/data/http_request.dart';
 import 'package:weather_app2/domain/repository/hive_storage.dart';
 import 'package:weather_app2/presentation/screens/search_city_screen.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';

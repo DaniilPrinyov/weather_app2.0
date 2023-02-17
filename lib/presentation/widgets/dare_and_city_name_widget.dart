@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
-import 'package:weather_app2/presentation/widgets/city_search_button.dart';
 
 class DateAndCityName extends StatelessWidget {
   const DateAndCityName({
