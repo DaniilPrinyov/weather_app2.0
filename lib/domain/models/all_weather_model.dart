@@ -14,13 +14,13 @@ class AllWeather {
     this.cod,
   );
   @JsonKey(name: "coord")
-  final Map<String, dynamic> cord;
-  final List<Map<String, dynamic>> weather;
-  final Map<String, dynamic> main;
-  final Map<String, dynamic> wind;
-  final Map<String, dynamic> clouds;
-  final String name;
-  final int cod;
+  final Map<String, dynamic>? cord;
+  final List<Map<String, dynamic>>? weather;
+  final Map<String, dynamic>? main;
+  final Map<String, dynamic>? wind;
+  final Map<String, dynamic>? clouds;
+  final String? name;
+  final dynamic cod;
 
   factory AllWeather.fromJson(Map<String, dynamic> json) =>
       _$AllWeatherFromJson(json);

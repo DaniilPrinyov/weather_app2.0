@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app2/presentation/screens/search_city_screen.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 
 class CityNameButton extends StatelessWidget {
-  CityNameButton({
+  const CityNameButton({
     super.key,
     required this.cityName,
-    required this.inController,
   });
 
   final String cityName;
-  Function(BuildContext)? inController;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => inController!(context),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SearchCity(nameCity: cityName),
+          ),
+        );
+      },
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(
           WeatherColors.bleak.withOpacity(0.2),

@@ -31,7 +31,8 @@ class HomeScreen extends StatelessWidget {
           if (snapshot.hasError) {
             return const Center(
               child: Text(
-                  "Для работы данного приложения требуется доступ к вашим геоданным"),
+                "Для работы данного приложения требуется доступ к вашим геоданным",
+              ),
             );
           } else {
             return Stack(
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 Transform.translate(
                   offset: const Offset(-150, -300),
                   child: RiveAnimation.asset(
-                    bgIcon(snapshot.data!.weather[0]["main"].toString()),
+                    bgIcon(snapshot.data!.weather![0]["main"].toString()),
                   ),
                 ),
                 Column(
@@ -48,9 +49,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         DateAndCityName(
-                          cityName: snapshot.data!.name,
+                          cityName: snapshot.data!.name!,
                           weatherDescription: snapshot
-                              .data!.weather[0]["description"]
+                              .data!.weather![0]["description"]
                               .toString(),
                         ),
                         const CitySearchButton(),
@@ -60,26 +61,28 @@ class HomeScreen extends StatelessWidget {
                     Column(
                       children: [
                         TempWidget(
-                          minTemp: nullChecker(snapshot.data!.main["temp_min"]),
-                          maxTemp: nullChecker(snapshot.data!.main["temp_max"]),
-                          temp: nullChecker(snapshot.data!.main["temp"]),
+                          minTemp:
+                              nullChecker(snapshot.data!.main!["temp_min"]),
+                          maxTemp:
+                              nullChecker(snapshot.data!.main!["temp_max"]),
+                          temp: nullChecker(snapshot.data!.main!["temp"]),
                           feelsLike:
-                              nullChecker(snapshot.data!.main["feels_like"]),
+                              nullChecker(snapshot.data!.main!["feels_like"]),
                         ),
                         const LineUIExample(),
                         WinterWidget(
-                          deg: (snapshot.data!.wind["deg"] != null)
-                              ? snapshot.data!.wind["deg"] as num
+                          deg: (snapshot.data!.wind!["deg"] != null)
+                              ? snapshot.data!.wind!["deg"] as num
                               : -1,
-                          gust: nullChecker(snapshot.data!.wind["gust"]),
-                          speed: nullChecker(snapshot.data!.wind["speed"]),
+                          gust: nullChecker(snapshot.data!.wind!["gust"]),
+                          speed: nullChecker(snapshot.data!.wind!["speed"]),
                         ),
                         const LineUIExample(),
                         OtherWeatherDataWidget(
                           humidity:
-                              nullChecker(snapshot.data!.main["humidity"]),
+                              nullChecker(snapshot.data!.main!["humidity"]),
                           pressure:
-                              nullChecker(snapshot.data!.main["pressure"]),
+                              nullChecker(snapshot.data!.main!["pressure"]),
                         ),
                         const SizedBox(height: 35),
                       ],

@@ -175,11 +175,6 @@ class CitySearchWidget extends StatelessWidget {
                     cityName: (snapshot.data != null)
                         ? snapshot.data![snapshot.data!.length - index - 1]
                         : "",
-                    inController: (p0) {
-                      myController.text = (snapshot.data != null)
-                          ? snapshot.data![snapshot.data!.length - index - 1]
-                          : "";
-                    },
                   );
                 },
               ),

@@ -41,7 +41,7 @@ class ApiClient {
       }
 
       return Geolocator.getCurrentPosition(
-        timeLimit: const Duration(seconds: 5),
+        timeLimit: const Duration(seconds: 20),
         desiredAccuracy: LocationAccuracy.low,
       );
     }

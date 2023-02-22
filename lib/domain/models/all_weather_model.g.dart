@@ -7,15 +7,15 @@ part of 'all_weather_model.dart';
 // **************************************************************************
 
 AllWeather _$AllWeatherFromJson(Map<String, dynamic> json) => AllWeather(
-      json['coord'] as Map<String, dynamic>,
-      (json['weather'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
+      json['coord'] as Map<String, dynamic>?,
+      (json['weather'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
           .toList(),
-      json['main'] as Map<String, dynamic>,
-      json['wind'] as Map<String, dynamic>,
-      json['clouds'] as Map<String, dynamic>,
-      json['name'] as String,
-      json['cod'] as int,
+      json['main'] as Map<String, dynamic>?,
+      json['wind'] as Map<String, dynamic>?,
+      json['clouds'] as Map<String, dynamic>?,
+      json['name'] as String?,
+      json['cod'],
     );
 
 Map<String, dynamic> _$AllWeatherToJson(AllWeather instance) =>

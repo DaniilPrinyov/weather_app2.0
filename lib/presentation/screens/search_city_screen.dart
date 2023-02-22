@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
 import 'package:weather_app2/data/http_request.dart';
+import 'package:weather_app2/presentation/screens/home_screen.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/ui_logic/null_checer.dart';
@@ -35,68 +36,91 @@ class SearchCity extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else {
-            return Stack(
-              children: [
-                Transform.translate(
-                  offset: const Offset(-150, -300),
-                  child: RiveAnimation.asset(
-                    bgIcon(snapshot.data!.weather[0]["main"].toString()),
+            if (snapshot.data?.cod == 200) {
+              return Stack(
+                children: [
+                  Transform.translate(
+                    offset: const Offset(-150, -300),
+                    child: RiveAnimation.asset(
+                      bgIcon(snapshot.data!.weather![0]["main"].toString()),
+                    ),
                   ),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        DateAndCityName(
-                          cityName: snapshot.data!.name,
-                          weatherDescription: snapshot
-                              .data!.weather[0]["description"]
-                              .toString(),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DateAndCityName(
+                            cityName: snapshot.data!.name!,
+                            weatherDescription: snapshot
+                                .data!.weather![0]["description"]
+                                .toString(),
+                          ),
+                          Column(
+                            children: const [
+                              CitySearchButton(),
+                              GoHomeButton(),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        children: [
+                          TempWidget(
+                            minTemp:
+                                nullChecker(snapshot.data!.main!["temp_min"]),
+                            maxTemp:
+                                nullChecker(snapshot.data!.main!["temp_max"]),
+                            temp: nullChecker(snapshot.data!.main!["temp"]),
+                            feelsLike:
+                                nullChecker(snapshot.data!.main!["feels_like"]),
+                          ),
+                          const LineUIExample(),
+                          WinterWidget(
+                            deg: (snapshot.data!.wind!["deg"] != null)
+                                ? snapshot.data!.wind!["deg"] as num
+                                : -1,
+                            gust: nullChecker(snapshot.data!.wind!["gust"]),
+                            speed: nullChecker(snapshot.data!.wind!["speed"]),
+                          ),
+                          const LineUIExample(),
+                          OtherWeatherDataWidget(
+                            humidity:
+                                nullChecker(snapshot.data!.main!["humidity"]),
+                            pressure:
+                                nullChecker(snapshot.data!.main!["pressure"]),
+                          ),
+                          const SizedBox(height: 35),
+                        ],
+                      ),
+                    ],
+                  ).asGlass(
+                    blurX: 30,
+                    blurY: 30,
+                  ),
+                ],
+              );
+            } else {
+              return AlertDialog(
+                backgroundColor: Colors.grey,
+                title: const Text("Город с таким названием не найден"),
+                content: const Text(
+                    "Пажалуйста проверьте правильность написания названия города или его существование"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
                         ),
-                        Column(
-                          children: const [
-                            CitySearchButton(),
-                            GoHomeButton(),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        TempWidget(
-                          minTemp: nullChecker(snapshot.data!.main["temp_min"]),
-                          maxTemp: nullChecker(snapshot.data!.main["temp_max"]),
-                          temp: nullChecker(snapshot.data!.main["temp"]),
-                          feelsLike:
-                              nullChecker(snapshot.data!.main["feels_like"]),
-                        ),
-                        const LineUIExample(),
-                        WinterWidget(
-                          deg: (snapshot.data!.wind["deg"] != null)
-                              ? snapshot.data!.wind["deg"] as num
-                              : -1,
-                          gust: nullChecker(snapshot.data!.wind["gust"]),
-                          speed: nullChecker(snapshot.data!.wind["speed"]),
-                        ),
-                        const LineUIExample(),
-                        OtherWeatherDataWidget(
-                          humidity:
-                              nullChecker(snapshot.data!.main["humidity"]),
-                          pressure:
-                              nullChecker(snapshot.data!.main["pressure"]),
-                        ),
-                        const SizedBox(height: 35),
-                      ],
-                    ),
-                  ],
-                ).asGlass(
-                  blurX: 30,
-                  blurY: 30,
-                ),
-              ],
-            );
+                      );
+                    },
+                    child: const Text("Ok"),
+                  ),
+                ],
+              );
+            }
           }
         },
       ),
