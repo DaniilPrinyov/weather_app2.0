@@ -121,7 +121,22 @@ class CitySearchWidget extends StatelessWidget {
           TextField(
             controller: myController,
             cursorColor: WeatherColors.bleak,
-            onChanged: (value) {},
+            onEditingComplete: () async {
+              if (myController.text != "") {
+                cityList.add(myController.text);
+                CityListHive().put(cityList);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SearchCity(nameCity: myController.text),
+                  ),
+                );
+                myController.text = "";
+              } else {
+                Navigator.pop(context);
+                myController.text = "";
+              }
+            },
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 onPressed: () async {

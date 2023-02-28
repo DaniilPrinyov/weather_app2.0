@@ -65,34 +65,41 @@ class SearchCity extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      Column(
-                        children: [
-                          TempWidget(
-                            minTemp:
-                                nullChecker(snapshot.data!.main!["temp_min"]),
-                            maxTemp:
-                                nullChecker(snapshot.data!.main!["temp_max"]),
-                            temp: nullChecker(snapshot.data!.main!["temp"]),
-                            feelsLike:
-                                nullChecker(snapshot.data!.main!["feels_like"]),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height - 350,
+                        child: ListView(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 10,
                           ),
-                          const LineUIExample(),
-                          WinterWidget(
-                            deg: (snapshot.data!.wind!["deg"] != null)
-                                ? snapshot.data!.wind!["deg"] as num
-                                : -1,
-                            gust: nullChecker(snapshot.data!.wind!["gust"]),
-                            speed: nullChecker(snapshot.data!.wind!["speed"]),
-                          ),
-                          const LineUIExample(),
-                          OtherWeatherDataWidget(
-                            humidity:
-                                nullChecker(snapshot.data!.main!["humidity"]),
-                            pressure:
-                                nullChecker(snapshot.data!.main!["pressure"]),
-                          ),
-                          const SizedBox(height: 35),
-                        ],
+                          children: [
+                            TempWidget(
+                              minTemp:
+                                  nullChecker(snapshot.data!.main!["temp_min"]),
+                              maxTemp:
+                                  nullChecker(snapshot.data!.main!["temp_max"]),
+                              temp: nullChecker(snapshot.data!.main!["temp"]),
+                              feelsLike: nullChecker(
+                                snapshot.data!.main!["feels_like"],
+                              ),
+                            ),
+                            const LineUIExample(),
+                            WinterWidget(
+                              deg: (snapshot.data!.wind!["deg"] != null)
+                                  ? snapshot.data!.wind!["deg"] as num
+                                  : -1,
+                              gust: nullChecker(snapshot.data!.wind!["gust"]),
+                              speed: nullChecker(snapshot.data!.wind!["speed"]),
+                            ),
+                            const LineUIExample(),
+                            OtherWeatherDataWidget(
+                              humidity:
+                                  nullChecker(snapshot.data!.main!["humidity"]),
+                              pressure:
+                                  nullChecker(snapshot.data!.main!["pressure"]),
+                            ),
+                            const SizedBox(height: 35),
+                          ],
+                        ),
                       ),
                     ],
                   ).asGlass(
@@ -103,12 +110,24 @@ class SearchCity extends StatelessWidget {
               );
             } else {
               return AlertDialog(
-                backgroundColor: Colors.grey,
-                title: const Text("Город с таким названием не найден"),
+                backgroundColor: Colors.redAccent,
+                title: const Text(
+                  "Город с таким названием не найден",
+                  style: TextStyle(
+                    color: Colors.yellow,
+                  ),
+                ),
                 content: const Text(
-                    "Пажалуйста проверьте правильность написания названия города или его существование"),
+                  "Пожалуйста проверьте правильность написания названия города или его существование",
+                  style: TextStyle(
+                    color: Colors.yellow,
+                  ),
+                ),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
+                    ),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -116,7 +135,12 @@ class SearchCity extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text("Ok"),
+                    child: const Text(
+                      "Ok",
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                      ),
+                    ),
                   ),
                 ],
               );
