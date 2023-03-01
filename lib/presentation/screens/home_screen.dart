@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
 import 'package:weather_app2/data/http_request.dart';
+import 'package:weather_app2/presentation/alerts/no_access_location.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
 import 'package:weather_app2/presentation/ui_logic/null_checer.dart';
@@ -28,42 +29,9 @@ class HomeScreen extends StatelessWidget {
               child: RiveAnimation.asset("assets/rive/load.riv"),
             );
           }
+
           if (snapshot.hasError) {
-            return AlertDialog(
-              backgroundColor: Colors.redAccent,
-              title: const Text(
-                "Данному приложению требуется доступ с вашей геопозиции",
-                style: TextStyle(
-                  color: Colors.yellow,
-                ),
-              ),
-              content: const Text(
-                "Пожалуйста предоставьте данный доступ в настройках если вы отказали в доступе при запуске или данный запрос не отобразился у вас при запуске.",
-                style: TextStyle(
-                  color: Colors.yellow,
-                ),
-              ),
-              actions: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.yellow),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Ok",
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                ),
-              ],
-            );
+            return const NoAccessLocation();
           } else {
             return Stack(
               children: [
@@ -101,8 +69,9 @@ class HomeScreen extends StatelessWidget {
                             maxTemp:
                                 nullChecker(snapshot.data!.main!["temp_max"]),
                             temp: nullChecker(snapshot.data!.main!["temp"]),
-                            feelsLike:
-                                nullChecker(snapshot.data!.main!["feels_like"]),
+                            feelsLike: nullChecker(
+                              snapshot.data!.main!["feels_like"],
+                            ),
                           ),
                           const LineUIExample(),
                           WinterWidget(

@@ -125,7 +125,7 @@ class CitySearchWidget extends StatelessWidget {
               if (myController.text != "") {
                 cityList.add(myController.text);
                 CityListHive().put(cityList);
-                Navigator.of(context).push(
+                await Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) =>
                         SearchCity(nameCity: myController.text),
@@ -143,7 +143,7 @@ class CitySearchWidget extends StatelessWidget {
                   if (myController.text != "") {
                     cityList.add(myController.text);
                     CityListHive().put(cityList);
-                    Navigator.of(context).push(
+                    await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) =>
                             SearchCity(nameCity: myController.text),

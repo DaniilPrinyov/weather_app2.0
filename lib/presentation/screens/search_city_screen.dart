@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:rive/rive.dart';
 import 'package:weather_app2/data/http_request.dart';
+import 'package:weather_app2/presentation/alerts/city_not_found.dart';
 import 'package:weather_app2/presentation/screens/home_screen.dart';
 import 'package:weather_app2/presentation/ui_data/colors.dart';
 import 'package:weather_app2/presentation/ui_logic/bg_icon.dart';
@@ -36,13 +37,15 @@ class SearchCity extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           } else {
-            if (snapshot.data?.cod == 200) {
+            if (snapshot.data?.cod != 400) {
               return Stack(
                 children: [
                   Transform.translate(
                     offset: const Offset(-150, -300),
                     child: RiveAnimation.asset(
-                      bgIcon(snapshot.data!.weather![0]["main"].toString()),
+                      bgIcon(
+                        snapshot.data!.weather![0]["main"].toString(),
+                      ),
                     ),
                   ),
                   Column(
@@ -109,41 +112,7 @@ class SearchCity extends StatelessWidget {
                 ],
               );
             } else {
-              return AlertDialog(
-                backgroundColor: Colors.redAccent,
-                title: const Text(
-                  "Город с таким названием не найден",
-                  style: TextStyle(
-                    color: Colors.yellow,
-                  ),
-                ),
-                content: const Text(
-                  "Пожалуйста проверьте правильность написания названия города или его существование",
-                  style: TextStyle(
-                    color: Colors.yellow,
-                  ),
-                ),
-                actions: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.yellow),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "Ok",
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                      ),
-                    ),
-                  ),
-                ],
-              );
+              return const CityNotFount();
             }
           }
         },
